@@ -1,3 +1,0 @@
-/Users/mrphantom/Documents/NSU/2_курс/ooop/lab_1/tmp/CMakeFiles/rebuild_cache.dir
-/Users/mrphantom/Documents/NSU/2_курс/ooop/lab_1/tmp/CMakeFiles/edit_cache.dir
-/Users/mrphantom/Documents/NSU/2_курс/ooop/lab_1/tmp/CMakeFiles/lab0.dir
