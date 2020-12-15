@@ -23,19 +23,19 @@ TEST(MemoryTests, TritMemoryUnknown) {
 
 TEST(MemoryTests, TritMemory) {
     TritSet set(6);
-    set[0] = trit::True;
+    set[0] = trit::False;
     set[1] = trit::False;
     set[2] = trit::True;
     set[3] = trit::True;
     set[4] = trit::Unknown;
-    set[5] = trit::False;
+    set[5] = trit::Unknown;
 
-    EXPECT_TRUE(set[0] == trit::True);
+    EXPECT_TRUE(set[0] == trit::False);
     EXPECT_TRUE(set[1] == trit::False);
     EXPECT_TRUE(set[2] == trit::True);
     EXPECT_TRUE(set[3] == trit::True);
     EXPECT_TRUE(set[4] == trit::Unknown);
-    EXPECT_TRUE(set[5] == trit::False);
+    EXPECT_TRUE(set[5] == trit::Unknown);
 }
 
 TEST(MemoryTests, UnknownOutOfBound) {
@@ -69,7 +69,7 @@ TEST(MemoryTests, ShrinkMemoryFree) {
     set[100100] = trit::True;
     set[100100] = trit::Unknown;
 
-    long a = 31;//76567 2 16 15 size-1 size 0 32 31
+    long a = 31;
 
     set[a] = trit::False;
 
@@ -95,24 +95,24 @@ TEST(tritOperationTests, OrTest) {
 
     setA[0] = trit::Unknown;
     setA[1] = trit::Unknown;
-    setA[2] = trit::Unknown;
+    setA[2] = trit::False;
 
     setB[0] = trit::True;
     setB[1] = trit::False;
-    setB[2] = trit::Unknown;
+    setB[2] = trit::False;
 
     TritSet setC = setA | setB;
 
     EXPECT_TRUE(setC[0] == trit::True);
     EXPECT_TRUE(setC[1] == trit::Unknown);
-    EXPECT_TRUE(setC[2] == trit::Unknown);
+    EXPECT_TRUE(setC[2] == trit::False);
 }
 
 TEST(tritOperationTests, AndTest) {
     TritSet setA(3);
     TritSet setB(3);
 
-    setA[0] = trit::Unknown;
+    setA[0] = trit::True;
     setA[1] = trit::Unknown;
     setA[2] = trit::Unknown;
 
@@ -122,7 +122,7 @@ TEST(tritOperationTests, AndTest) {
 
     TritSet setC = setA & setB;
 
-    EXPECT_TRUE(setC[0] == trit::Unknown);
+    EXPECT_TRUE(setC[0] == trit::True);
     EXPECT_TRUE(setC[1] == trit::False);
     EXPECT_TRUE(setC[2] == trit::Unknown);
 }
@@ -142,7 +142,7 @@ TEST(tritOperationTests, NotTest) {
 }
 
 TEST(OtherFunctionsTests, CardinalityFunctionTest) {
-    TritSet set(3);
+    TritSet set(5);
 
     set[0] = trit::True;
     set[1] = trit::Unknown;
@@ -159,30 +159,30 @@ TEST(OtherFunctionsTests, CardinalityMapTest) {
     set[0] = trit::True;
     set[1] = trit::Unknown;
     set[2] = trit::False;
-    set[3] = trit::False;
+    set[3] = trit::True;
     set[4] = trit::Unknown;
     set[5] = trit::False;
-    set[6] = trit::Unknown;
+    set[6] = trit::True;
     set[7] = trit::Unknown;
-    set[8] = trit::Unknown;
+    set[8] = trit::True;
     set[9] = trit::Unknown;
     set[10] = trit::Unknown;
 
     auto a = set.cardinality();
 
-    EXPECT_EQ(a[trit::True], 1);
-    EXPECT_EQ(a[trit::False], 3);
-    EXPECT_EQ(a[trit::Unknown], 2);
+    EXPECT_EQ(a[trit::True], 4);
+    EXPECT_EQ(a[trit::False], 2);
+    EXPECT_EQ(a[trit::Unknown], 3);
 }
 
 TEST(OtherFunctionsTests, TrimTest) {
     TritSet set(7);
 
     set[0] = trit::True;
-    set[1] = trit::Unknown;
+    set[1] = trit::True;
     set[2] = trit::False;
     set[3] = trit::False;
-    set[4] = trit::Unknown;
+    set[4] = trit::True;
     set[5] = trit::True;
     set[6] = trit::Unknown;
 
@@ -193,12 +193,18 @@ TEST(OtherFunctionsTests, TrimTest) {
 }
 
 TEST(OtherFunctionsTests, LenTest) {
-    TritSet set(4);
+    TritSet set(10);
 
     set[0] = trit::True;
     set[1] = trit::Unknown;
     set[2] = trit::False;
     set[3] = trit::Unknown;
+    set[4] = trit::True;
+    set[5] = trit::Unknown;
+    set[6] = trit::False;
+    set[7] = trit::Unknown;
+    set[8] = trit::Unknown;
+    set[9] = trit::Unknown;
 
-    EXPECT_EQ(set.length(), 3);
+    EXPECT_EQ(set.length(), 7);
 }
