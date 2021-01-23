@@ -57,7 +57,7 @@ int main() {
         cout << "Ничья!\n";
 
     else if (player_order)
-        cout << "Игрок 1 выиграл!\n" << game_field.get_draw();
+        cout << "Игрок 1 выиграл!\n";
 
     else
         mode == 1 ? cout << "Игрок 2 выиграл!\n" : cout << "Победа ИИ!\n";
